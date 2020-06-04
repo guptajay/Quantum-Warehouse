@@ -1,0 +1,144 @@
+/Users/pierresevestre/miniconda3/envs/DysonLearning/lib/python3.6/site-packages/gym/envs/registration.py:14: PkgResourcesDeprecationWarning: Parameters to load are deprecated.  Call .resolve and .require separately.
+  result = entry_point.load(False)
+Initial packages spawned, with average access time : None, and average energy cost : None
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+flatten_1 (Flatten)          (None, 8)                 0
+_________________________________________________________________
+dense_1 (Dense)              (None, 256)               2048
+_________________________________________________________________
+activation_1 (Activation)    (None, 256)               0
+_________________________________________________________________
+dense_2 (Dense)              (None, 128)               32768
+_________________________________________________________________
+activation_2 (Activation)    (None, 128)               0
+_________________________________________________________________
+dense_3 (Dense)              (None, 128)               16384
+_________________________________________________________________
+activation_3 (Activation)    (None, 128)               0
+_________________________________________________________________
+dense_4 (Dense)              (None, 6)                 768
+_________________________________________________________________
+activation_4 (Activation)    (None, 6)                 0
+=================================================================
+Total params: 51,968
+Trainable params: 51,968
+Non-trainable params: 0
+_________________________________________________________________
+None
+Testing for 1 episodes ...
+Initial packages spawned, with average access time : None, and average energy cost : None
+Step return is : `state`, 10.939964654488678, False, Dropping a package from 0 to 34
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 26
+Step return is : `state`, 9.449381453551872, False, Dropping a package from 0 to 28
+Step return is : `state`, 9.38934610804055, False, Dropping a package from 0 to 29
+Step return is : `state`, 10.819893963466034, False, Dropping a package from 0 to 36
+Step return is : `state`, 9.339611199375463, False, Dropping a package from 0 to 14
+Step return is : `state`, 9.329310762529229, False, Dropping a package from 0 to 30
+Step return is : `state`, 9.289876290710374, False, Dropping a package from 0 to 2
+Step return is : `state`, 9.269275417017909, False, Dropping a package from 0 to 31
+Step return is : `state`, 9.21954050835282, False, Dropping a package from 0 to 16
+Step return is : `state`, 9.209240071506587, False, Dropping a package from 0 to 32
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 19
+Step return is : `state`, 9.109770254176409, False, Dropping a package from 0 to 8
+Step return is : `state`, 9.149204725995265, False, Dropping a package from 0 to 33
+Step return is : `state`, 9.449381453551872, False, Dropping a package from 0 to 21
+Step return is : `state`, 9.38934610804055, False, Dropping a package from 0 to 22
+Step return is : `state`, 9.339611199375463, False, Dropping a package from 0 to 11
+Step return is : `state`, 9.269275417017909, False, Dropping a package from 0 to 24
+Empty queue: retrieving packages with cumulative reward : 123.70658915815747
+Step return is : `state`, 123.70658915815747, False, Dropping a package from 0 to 13
+Step return is : `state`, 9.509416799063194, False, Dropping a package from 0 to 27
+Step return is : `state`, 9.38934610804055, False, Dropping a package from 0 to 29
+Step return is : `state`, 10.879929308977356, False, Dropping a package from 0 to 42
+Step return is : `state`, 10.819893963466034, False, Dropping a package from 0 to 43
+Step return is : `state`, 9.629487490085838, False, Dropping a package from 0 to 18
+Step return is : `state`, 10.759858617954714, False, Dropping a package from 0 to 44
+Empty queue: retrieving packages with cumulative reward : 101.64655381264613
+Step return is : `state`, 101.64655381264613, False, Dropping a package from 0 to 45
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 26
+Step return is : `state`, 9.509416799063194, False, Dropping a package from 0 to 27
+Step return is : `state`, 10.879929308977356, False, Dropping a package from 0 to 42
+Step return is : `state`, 10.819893963466034, False, Dropping a package from 0 to 43
+Step return is : `state`, 10.759858617954714, False, Dropping a package from 0 to 44
+Step return is : `state`, 9.229840945199053, False, Dropping a package from 0 to 3
+Step return is : `state`, 10.699823272443393, False, Dropping a package from 0 to 45
+Step return is : `state`, 10.63978792693207, False, Dropping a package from 0 to 46
+Step return is : `state`, 9.629487490085838, False, Dropping a package from 0 to 18
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 19
+Step return is : `state`, 10.579752581420749, False, Dropping a package from 0 to 47
+Step return is : `state`, 9.509416799063194, False, Dropping a package from 0 to 20
+Empty queue: retrieving packages with cumulative reward : 103.25720770460559
+Step return is : `state`, 103.25720770460559, False, Dropping a package from 0 to 34
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 26
+Step return is : `state`, 10.879929308977356, False, Dropping a package from 0 to 42
+Step return is : `state`, 10.939964654488678, False, Dropping a package from 0 to 34
+Step return is : `state`, 10.819893963466034, False, Dropping a package from 0 to 43
+Step return is : `state`, 9.629487490085838, False, Dropping a package from 0 to 18
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 19
+Step return is : `state`, 9.509416799063194, False, Dropping a package from 0 to 20
+Step return is : `state`, 9.209240071506587, False, Dropping a package from 0 to 25
+Step return is : `state`, 10.759858617954714, False, Dropping a package from 0 to 44
+Empty queue: retrieving packages with cumulative reward : 105.15773788727542
+Step return is : `state`, 105.15773788727542, False, Dropping a package from 0 to 46
+Step return is : `state`, 10.879929308977356, False, Dropping a package from 0 to 42
+Step return is : `state`, 10.819893963466034, False, Dropping a package from 0 to 43
+Step return is : `state`, 10.759858617954714, False, Dropping a package from 0 to 44
+Step return is : `state`, 10.699823272443393, False, Dropping a package from 0 to 45
+Step return is : `state`, 9.629487490085838, False, Dropping a package from 0 to 18
+Empty queue: retrieving packages with cumulative reward : 109.80605897548762
+Step return is : `state`, 109.80605897548762, False, Dropping a package from 0 to 19
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 26
+Step return is : `state`, 9.509416799063194, False, Dropping a package from 0 to 27
+Step return is : `state`, 10.879929308977356, False, Dropping a package from 0 to 42
+Step return is : `state`, 10.819893963466034, False, Dropping a package from 0 to 43
+Step return is : `state`, 10.759858617954714, False, Dropping a package from 0 to 44
+Step return is : `state`, 10.699823272443393, False, Dropping a package from 0 to 45
+Step return is : `state`, 10.939964654488678, False, Dropping a package from 0 to 34
+Step return is : `state`, 9.629487490085838, False, Dropping a package from 0 to 18
+Empty queue: retrieving packages with cumulative reward : 100.51618268477725
+Step return is : `state`, 100.51618268477725, False, Dropping a package from 0 to 19
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 26
+Step return is : `state`, 9.509416799063194, False, Dropping a package from 0 to 27
+Step return is : `state`, 10.819893963466034, False, Dropping a package from 0 to 43
+Step return is : `state`, 9.629487490085838, False, Dropping a package from 0 to 18
+Empty queue: retrieving packages with cumulative reward : 108.99646544886784
+Step return is : `state`, 108.99646544886784, False, Dropping a package from 0 to 44
+Step return is : `state`, 9.109770254176409, False, Dropping a package from 0 to 8
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 26
+Step return is : `state`, 9.509416799063194, False, Dropping a package from 0 to 27
+Step return is : `state`, 9.449381453551872, False, Dropping a package from 0 to 28
+Step return is : `state`, 10.879929308977356, False, Dropping a package from 0 to 42
+Step return is : `state`, 10.819893963466034, False, Dropping a package from 0 to 43
+Step return is : `state`, 10.759858617954714, False, Dropping a package from 0 to 44
+Step return is : `state`, 10.699823272443393, False, Dropping a package from 0 to 45
+Step return is : `state`, 9.289876290710374, False, Dropping a package from 0 to 2
+Step return is : `state`, 10.63978792693207, False, Dropping a package from 0 to 46
+Step return is : `state`, 10.579752581420749, False, Dropping a package from 0 to 47
+Step return is : `state`, 10.519717235909427, False, Dropping a package from 0 to 48
+Empty queue: retrieving packages with cumulative reward : 89.69628872131123
+Step return is : `state`, 89.69628872131123, False, Dropping a package from 0 to 49
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 26
+Step return is : `state`, 9.449381453551872, False, Dropping a package from 0 to 28
+Step return is : `state`, 9.38934610804055, False, Dropping a package from 0 to 29
+Step return is : `state`, 10.879929308977356, False, Dropping a package from 0 to 42
+Step return is : `state`, 10.759858617954714, False, Dropping a package from 0 to 44
+Empty queue: retrieving packages with cumulative reward : 89.51618268477726
+Step return is : `state`, 89.51618268477726, False, Dropping a package from 0 to 49
+Step return is : `state`, 9.569452144574516, False, Dropping a package from 0 to 26
+Step return is : `state`, 9.38934610804055, False, Dropping a package from 0 to 29
+Step return is : `state`, 9.339611199375463, False, Dropping a package from 0 to 14
+Step return is : `state`, 10.879929308977356, False, Dropping a package from 0 to 42
+Step return is : `state`, 9.329310762529229, False, Dropping a package from 0 to 30
+Step return is : `state`, 9.16980559968773, False, Dropping a package from 0 to 4
+Step return is : `state`, 10.939964654488678, False, Dropping a package from 0 to 34
+Step return is : `state`, 10.759858617954714, False, Dropping a package from 0 to 44
+Empty queue: retrieving packages with cumulative reward : 107.32577621139707
+Step return is : `state`, 107.32577621139707, False, Dropping a package from 0 to 18
+Step return is : `state`, 9.339611199375463, False, Dropping a package from 0 to 14
+Step return is : `state`, 10.939964654488678, False, Dropping a package from 0 to 34
+Step return is : `state`, 9.329310762529229, False, Dropping a package from 0 to 30
+Step return is : `state`, 9.279575853864142, False, Dropping a package from 0 to 15
+End of episode 0 with 100 steps, and average episode reward 19.383221896365306, and unique number of actions during episode: 6 and final filling ratio : 0.56
+Episode 1: reward: 1938.322, steps: 100

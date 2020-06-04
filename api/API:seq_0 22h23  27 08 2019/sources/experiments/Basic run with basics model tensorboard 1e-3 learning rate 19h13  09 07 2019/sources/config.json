@@ -1,0 +1,62 @@
+{   
+    "name" : "Basic run with basics model tensorboard 1e-3 learning rate",
+    "experiments_dir" : "experiments",
+    "load_dir" : "saved_models",
+    "skip_dirs" : [".vscode,.git,experiments"],
+    "verbose" : 0,
+    "ghost" : false,
+    "tensorboard":true,
+
+    "config" : {
+    
+        "architecture" : "basic_seq_model",
+        "load_model" : null,
+        
+        "agent":
+        {
+            "name" : "DQNAgent",
+            "args" : [],
+            "kwargs" : {
+                "target_model_update" : 1e-2,
+                "nb_steps_warmup" : 1
+            }
+        },
+    
+        "training":
+        {
+            "visualize" : false,
+            "nb_steps" : 20000,
+            "nb_max_episode_steps" : 200,
+            "action_repetition" : 5,
+            "nb_max_start_steps" : 100
+        },
+        
+        "optimization":
+        {
+            "optimizer" : "Adam",
+            "lr" : 1e-3
+        },
+        
+        "memory":
+        {
+            "name" : "SequentialMemory",
+            "args" : [],
+            "kwargs" : {"limit" : 1000, "window_length":1, "ignore_episode_boundaries": true}
+            
+        },
+        
+        "policy" : {
+            "name": "MaxBoltzmannQPolicy",
+            "args" : [],
+            "kwargs" : { "eps":0.2,"tau":3 }
+        },
+        "testing":
+        {
+            "do" : false,
+            "render" : false,
+            "nb_episodes" : 5
+        }
+        
+    }
+    
+}

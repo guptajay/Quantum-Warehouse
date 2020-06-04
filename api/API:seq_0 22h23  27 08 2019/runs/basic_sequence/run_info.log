@@ -1,0 +1,21 @@
+(22h23  27 08 2019) Starting call number 0 with *args () and **kwargs {}
+Run config after call 0 :
+    command : basic_sequence
+    logger : basic_sequence
+    calls_lock : <unlocked _thread.lock object at 0xb2ff33710>
+    calls_info :
+        0 :
+            duration : 26.355
+            stop_time : 22h23  27 08 2019
+            start_time : 22h23  27 08 2019
+    status : Finished
+    results :
+        0 : None
+    info_logger : <Logger basic_sequence_info (NOTSET)>
+    tb_dir : None
+    metrics_dir : /Users/pierresevestre/Projets/IA/DysonLearning/api/API:seq_0 22h23  27 08 2019/runs/basic_sequence/metrics
+    save_dir : /Users/pierresevestre/Projets/IA/DysonLearning/api/API:seq_0 22h23  27 08 2019/runs/basic_sequence/files
+    run_dir : /Users/pierresevestre/Projets/IA/DysonLearning/api/API:seq_0 22h23  27 08 2019/runs/basic_sequence
+    name : basic_sequence
+    id : 2
+

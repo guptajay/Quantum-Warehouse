@@ -1,0 +1,58 @@
+{   
+    "name" : "Final_exp",
+    "experiments_dir" : "experiments",
+    "load_dir" : "saved_models",
+    "skip_dirs" : [".vscode,.git,experiments"],
+    "verbose" : 0,
+    "ghost" : true,
+    "tensorboard":true,
+
+    "config" : {
+        "architecture": "basic_seq_model",
+        "load_model": "single_size",
+        "do_training": false,
+        "agent": {
+            "name": "MaskingDQNAgent",
+            "args": [],
+            "kwargs": {
+                "target_model_update": 1e-2,
+                "nb_steps_warmup": 1
+            }
+        },
+        "training": {
+            "visualize": false,
+            "nb_steps": 100000,
+            "nb_max_episode_steps": 1000,
+            "action_repetition": 1,
+            "nb_max_start_steps": 40
+        },
+        "optimization": {
+            "optimizer": "Adam",
+            "lr": 3e-4
+        },
+        "memory": {
+            "name": "SequentialMemory",
+            "args": [],
+            "kwargs": {
+                "limit": 1000,
+                "window_length": 1,
+                "ignore_episode_boundaries": true
+            }
+        },
+        "policy": {
+            "name": "MaskingMaxBoltzmannQPolicy",
+            "args": [],
+            "kwargs": {
+                "eps": 0.2,
+                "tau": 3
+            }
+        },
+        "testing": {
+            "do": true,
+            "render": true,
+            "nb_episodes": 20,
+            "nb_max_start_steps": 1,
+            "nb_max_episode_steps":10e9
+        }
+    }
+}

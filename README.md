@@ -1,4 +1,29 @@
-# DysonLearning
+# Quantum Warehouse
+> Reinforcement Learning architecture to automate long term planning of warehouse inventory for enterprise deployment.
+
+## Installation Instructions
+
+```
+conda -V  
+conda update conda
+conda create -n quantumwarehouse python=3.7.4 anaconda
+conda activate quantumwarehouse
+python -m pip install keras keras-rl matplotlib gym tensorflow==1.13.1
+```
+
+```
+cd "environment package/warehouse" // Navigate to Warehouse Environment
+python setup.py install
+```
+
+```
+cd .. // Navigate to Root 
+cd .. // Navigate to Root
+python main.py
+```
+
+
+***
 
 # API usage
 
