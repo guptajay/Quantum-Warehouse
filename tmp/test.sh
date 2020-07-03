@@ -1,1 +1,0 @@
-echo "Task '$pwd'"
