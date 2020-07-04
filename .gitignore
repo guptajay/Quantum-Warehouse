@@ -146,3 +146,6 @@ cython_debug/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Database Configuration
+Quantum-Warehouse/data/config.py

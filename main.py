@@ -6,6 +6,7 @@ from env.WarehouseEnv import WarehouseEnv
 import pymongo
 from pymongo import MongoClient
 from data.config import USERNAME, PASSWORD, DATABASE_NAME
+from random import randint
 
 ## Database Configuration ##
 connectionURL = "mongodb+srv://" + USERNAME + ":" + PASSWORD + \
@@ -24,12 +25,12 @@ obs = env.reset()
 print("")
 
 for package in collection.find():
-    action = [[package['packageID'], 1]]
+    action = [[randint(1, 49), 1, package['packageID'], package['weight']]]
     obs, rewards, done, info = env.step(action)
     env.render()
 
 # Withdrawing package at Index 1
-action = [[5, 0]]
+action = [[5, 0, 1, 2]]
 obs, rewards, done, info = env.step(action)
 env.render()
 
