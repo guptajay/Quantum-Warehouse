@@ -4,6 +4,9 @@ import gym
 from gym import spaces
 import numpy as np
 import math
+from .WarehouseGraph import WarehouseGraph
+import pandas as pd
+import matplotlib.pyplot as plt
 gym.logger.set_level(40)
 
 # Check env/Grid.pdf for Grid details
@@ -138,6 +141,8 @@ class WarehouseEnv(gym.Env):
             print(f'Package Weight: {self.weight}')
             print(f'Action: {actionPerformed}')
 
+            self.visualization = WarehouseGraph(self.current_step, "ok")
+
             # To view the Environment State at each step, uncomment this line
-            #print(f'Step: \n {self.current_step}')
+            # print(f'Step: \n {self.current_step}')
             print("--------------------------------")

@@ -105,9 +105,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
-env/
 venv/
 ENV/
 env.bak/
@@ -148,4 +146,4 @@ ehthumbs.db
 Thumbs.db
 
 # Database Configuration
-Quantum-Warehouse/data/config.py
+config.py
