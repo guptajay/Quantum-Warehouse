@@ -20,7 +20,7 @@ class WarehouseEnv(gym.Env):
         A warehouse is built in the form of a 7 x 7 grid, where each location in the grid
         can be used to store a package. Only one package can be stored at each location. 
         It becomes more expensive to store and retreive packages as we go deeper inside
-        the grid system. 
+        the grid. 
     """
 
     metadata = {'render.modes': ['human']}
