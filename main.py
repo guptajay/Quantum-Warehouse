@@ -25,13 +25,8 @@ obs = env.reset()
 print("")
 
 for package in collection.find():
-    action = [[randint(1, 49), 1, package['packageID'], package['weight']]]
+    action = [randint(1, 49)]
     obs, rewards, done, info = env.step(action)
     env.render()
-
-# Withdrawing package at Index 1
-action = [[5, 0, 1, 2]]
-obs, rewards, done, info = env.step(action)
-env.render()
 
 print("")

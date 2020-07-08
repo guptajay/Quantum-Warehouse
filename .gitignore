@@ -139,4 +139,4 @@ ehthumbs.db
 Thumbs.db
 
 # Database Configuration
-config.py
+data/

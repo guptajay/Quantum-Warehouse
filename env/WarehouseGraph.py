@@ -10,7 +10,7 @@ GRID_SIZE = 7
 class WarehouseGraph:
     """A stock trading visualization using matplotlib made to render OpenAI gym environments"""
 
-    def __init__(self, warehouse_state, title=None):
+    def __init__(self, warehouse_state):
 
         self.warehouse_state = warehouse_state
 
@@ -18,6 +18,7 @@ class WarehouseGraph:
 
         k = 0
 
+        # TODO - This is incorrect, need to fix
         for i in range(GRID_SIZE):
             for j in range(GRID_SIZE):
                 data[i][j] = warehouse_state[k][1]
@@ -36,9 +37,10 @@ class WarehouseGraph:
                 linestyle='-', color='k', linewidth=2)
         ax.set_xticks(np.arange(-.5, 7, 1))
         ax.set_yticks(np.arange(-.5, 7, 1))
-
+        plt.suptitle("Quantum Warehouse")
         plt.show(block=False)
         plt.pause(5)
+        self.close()
 
     def close(self):
         plt.close()
