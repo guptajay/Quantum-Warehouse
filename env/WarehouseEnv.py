@@ -12,6 +12,7 @@ gym.logger.set_level(40)
 # Check env/Grid.pdf for Grid details
 GRID_SIZE = 7
 DEPTH = math.ceil(math.sqrt(GRID_SIZE))
+WITHDRAW_TIME = 6
 
 
 class WarehouseEnv(gym.Env):
@@ -67,7 +68,7 @@ class WarehouseEnv(gym.Env):
 
         # Warehouse Observation Space
         self.observation_space = spaces.Box(
-            low=1, high=GRID_SIZE * GRID_SIZE, shape=(GRID_SIZE * GRID_SIZE, 2), dtype=np.float32)
+            low=1, high=GRID_SIZE * GRID_SIZE, shape=(GRID_SIZE * GRID_SIZE, 3), dtype=np.float32)
 
     def _next_observation(self):
         obs = self.current_step
@@ -76,6 +77,22 @@ class WarehouseEnv(gym.Env):
     def _take_action(self, action):
         # action = index of space in warehouse
         self.index = action
+
+        self.withdrawFlag = False
+        self.withdrawPos = 0
+
+        # Increment timestep if shelf is occupied
+        for i in range(GRID_SIZE * GRID_SIZE):
+            if(self.current_step[i][1] == 1):
+                self.current_step[i][2] = self.current_step[i][2] + 1
+
+             # Withdraw is package is been there for too long (for training only)
+                if(self.current_step[i][2] >= WITHDRAW_TIME):
+                    self.current_step[i][1] = 0
+                    self.current_step[i][2] = 0
+                    self.withdrawPos = i+1
+                    self.withdrawFlag = True
+
         self.current_step[self.index-1][1] = 1
 
     def step(self, action):
@@ -91,6 +108,19 @@ class WarehouseEnv(gym.Env):
             reward = -3
         else:
             reward = -4
+
+        if(self.withdrawFlag == True):
+            if(1 <= self.withdrawPos <= 24):
+                reward = reward - 1
+            elif(25 <= self.withdrawPos <= 40):
+                reward = reward - 2
+            elif(41 <= self.withdrawPos <= 48):
+                reward = reward - 3
+            else:
+                reward = reward - 4
+
+        # For logging purposes
+        self.totalReward = reward
 
         # Episode Finish Condition - The warehouse is full
         warehouseFull = True
@@ -108,21 +138,31 @@ class WarehouseEnv(gym.Env):
         self.depth = DEPTH
         self.grid_size = GRID_SIZE
 
-        self.current_step = np.zeros(shape=(GRID_SIZE * GRID_SIZE, 2))
+        self.current_step = np.zeros(shape=(GRID_SIZE * GRID_SIZE, 3))
 
         for i in range(GRID_SIZE * GRID_SIZE):
-            # [index, empty/occupied (0/1)]
-            self.current_step[i] = (i+1, 0)
+            # [index, empty/occupied (0/1), timestep]
+            self.current_step[i] = (i+1, 0, 0)
 
         return self._next_observation()
 
     def render(self, mode='human', close=False):
         # Render the environment to the screen
-        actionPerformed = "Package Inserted"
+        if(self.withdrawFlag == True):
+            print("")
+            print("--------------------------------")
+            print(f'Position: {self.withdrawPos}')
+            print(f'AUTO: Package Withdrawn')
+            print("--------------------------------")
+
         print("--------------------------------")
         print(f'Position: {self.index}')
-        print(f'Action: {actionPerformed}')
+        print(f'Action: Package Inserted')
         print("--------------------------------")
+        print("")
+        print(f'Total Reward: {self.totalReward}')
+        print("################################")
+
         self.visualization = WarehouseGraph(self.current_step)
 
         # To view the Environment State at each step, uncomment this line

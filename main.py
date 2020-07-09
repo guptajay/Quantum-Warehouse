@@ -27,6 +27,8 @@ print("")
 for package in collection.find():
     action = [randint(1, 49)]
     obs, rewards, done, info = env.step(action)
-    env.render()
 
-print("")
+    print("Package ID:", package['packageID'])
+    print("Package Weight:", package['weight'])
+    env.render()
+    print("")
