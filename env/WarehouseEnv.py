@@ -46,13 +46,15 @@ class WarehouseEnv(gym.Env):
         The warehouse is empty. 
 
     Episode Termination:
-        The warehouse is full. 
+        There are no more packages to insert in the warehouse.
     """
 
     metadata = {'render.modes': ['human']}
 
-    def __init__(self):
+    def __init__(self, totalPackages):
         super(WarehouseEnv, self).__init__()
+        self.totalPackages = totalPackages
+        self.packagesProcessed = 0
 
         # Reward Range
         self.reward_range = (-(DEPTH+1), -1)
@@ -122,13 +124,12 @@ class WarehouseEnv(gym.Env):
         # For logging purposes
         self.totalReward = reward
 
-        # Episode Finish Condition - The warehouse is full
-        warehouseFull = True
-        for i in range(GRID_SIZE * GRID_SIZE):
-            if(self.current_step[i][1] == 0):
-                warehouseFull = False
+        # Episode Finish Condition - There are no more packages to insert
+        done = False
+        self.packagesProcessed += 1
+        if(self.packagesProcessed > self.totalPackages):
+            done = True
 
-        done = warehouseFull
         obs = self._next_observation()
 
         return obs, reward, done, {}
@@ -166,4 +167,4 @@ class WarehouseEnv(gym.Env):
         self.visualization = WarehouseGraph(self.current_step)
 
         # To view the Environment State at each step, uncomment this line
-        # print(f'Step: \n {self.current_step}')
+        print(f'Step: \n {self.current_step}')

@@ -17,8 +17,10 @@ db = cluster["warehouse"]
 collection = db["schedule"]
 ## Database Configuration ##
 
+totalPackages = collection.count_documents({})
+
 # The algorithms require a vectorized environment to run
-env = DummyVecEnv([lambda: WarehouseEnv()])
+env = DummyVecEnv([lambda: WarehouseEnv(totalPackages)])
 
 obs = env.reset()
 
@@ -27,7 +29,6 @@ print("")
 for package in collection.find():
     action = [randint(1, 49)]
     obs, rewards, done, info = env.step(action)
-
     print("Package ID:", package['packageID'])
     print("Package Weight:", package['weight'])
     env.render()
