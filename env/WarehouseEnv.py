@@ -111,7 +111,7 @@ class WarehouseEnv(gym.Env):
         else:
             reward = -4
 
-        if(self.withdrawFlag == True):
+        if(self.withdrawFlag):
             if(1 <= self.withdrawPos <= 24):
                 reward = reward - 1
             elif(25 <= self.withdrawPos <= 40):
@@ -149,7 +149,7 @@ class WarehouseEnv(gym.Env):
 
     def render(self, mode='human', close=False):
         # Render the environment to the screen
-        if(self.withdrawFlag == True):
+        if(self.withdrawFlag):
             print("")
             print("--------------------------------")
             print(f'Position: {self.withdrawPos}')
