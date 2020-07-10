@@ -3,6 +3,9 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/guptajay/quantum-warehouse/badge/development?s=bebe47a25427119086bfbd09c524b267a20d4410)](https://www.codefactor.io/repository/github/guptajay/quantum-warehouse/overview/development)
 
+## Documentation
+All documentation is available in the GitHub Wiki [here](https://github.com/guptajay/Quantum-Warehouse/wiki). 
+
 ## Introduction
 Warehouse owners face the problem of a high land lease yet limited storage efficiency. Price ranges from $2 to $5 per sqaure feet around Singapore. There are logistical issues such as fluctuating manpower in terms of supply and demand. Operations of conventional warehouse are unable to keep up with growth experienced by e-commerce. There was a 24.5% increase in e-commerce sales in Singapore in 2020 compared to 2019. There is a need for more efficient picking and packing order. 
 
