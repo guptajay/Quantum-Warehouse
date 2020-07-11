@@ -1,12 +1,13 @@
 import gym
 import json
 import datetime as dt
-from stable_baselines.common.vec_env import DummyVecEnv
 from env.WarehouseEnv import WarehouseEnv
 import pymongo
 from pymongo import MongoClient
 from data.config import USERNAME, PASSWORD, DATABASE_NAME
 from random import randint
+import numpy as np
+import random
 
 ## Database Configuration ##
 connectionURL = "mongodb+srv://" + USERNAME + ":" + PASSWORD + \
@@ -18,19 +19,15 @@ collection = db["schedule"]
 ## Database Configuration ##
 
 totalPackages = collection.count_documents({})
-
-# The algorithms require a vectorized environment to run
-env = WarehouseEnv(totalPackages)
-
-obs = env.reset()
-
-print("")
-
 packages = []
 
 for package in collection.find():
     packages.append((package['packageID'], package['weight']))
 
+env = WarehouseEnv(totalPackages)
+obs = env.reset()
+
+## RL ##
 done = False
 epochs = 0
 totalReward = 0
@@ -38,14 +35,12 @@ totalReward = 0
 while not done:
     action = env.action_space.sample()
     obs, rewards, done, info = env.step(action)
-
-    totalReward += rewards
-    epochs += 1
-
-    print("Package ID:", package['packageID'])
-    print("Package Weight:", package['weight'])
+    print("Package ID:", packages[epochs][0])
+    print("Package Weight:", packages[epochs][1])
     env.render()
     print("")
+    totalReward += rewards
+    epochs += 1
 
 
 print("Timesteps taken: {}".format(epochs))

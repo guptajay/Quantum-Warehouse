@@ -132,7 +132,7 @@ class WarehouseEnv(gym.Env):
         # Episode Finish Condition - There are no more packages to insert
         done = False
         self.packagesProcessed += 1
-        if(self.packagesProcessed > self.totalPackages):
+        if(self.packagesProcessed >= self.totalPackages):
             done = True
 
         obs = self._next_observation()
