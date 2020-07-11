@@ -20,16 +20,33 @@ collection = db["schedule"]
 totalPackages = collection.count_documents({})
 
 # The algorithms require a vectorized environment to run
-env = DummyVecEnv([lambda: WarehouseEnv(totalPackages)])
+env = WarehouseEnv(totalPackages)
 
 obs = env.reset()
 
 print("")
 
+packages = []
+
 for package in collection.find():
-    action = [randint(1, 49)]
+    packages.append((package['packageID'], package['weight']))
+
+done = False
+epochs = 0
+totalReward = 0
+
+while not done:
+    action = env.action_space.sample()
     obs, rewards, done, info = env.step(action)
+
+    totalReward += rewards
+    epochs += 1
+
     print("Package ID:", package['packageID'])
     print("Package Weight:", package['weight'])
     env.render()
     print("")
+
+
+print("Timesteps taken: {}".format(epochs))
+print("Reward incurred: {}".format(totalReward))

@@ -27,14 +27,19 @@ class WarehouseEnv(gym.Env):
         This environment corresponds to a version of Quantum Warehouse.
 
     Observation:
-        Type: Box([Index, Status])
-        Num (Index)                     Observation (Status)              
-        0 - GRID_SIZE * GRID_SIZE       Empty/Occupied (0/1)  
+        Type: Box(3)
+        Num      Observation                                Min        Max
+        0        Index (Location) in Warehouse              1          GRID_SIZE * GRID_SIZE
+        1        Status of Occupancy                        0 (Vacant) 1 (Occupied)
+        2        Timestamp of the package inside Warehouse  0          Inf
 
     Actions:
         Type: Discrete(GRID_SIZE * GRID_SIZE)
-        Num         Action
-        n           Insert package at position n
+        Num                     Action
+        1                       Insert package at location 1
+        2                       Insert package at location 2
+        ..                      ..  
+        GRID_SIZE * GRID_SIZE   Insert package at location GRID_SIZE * GRID_SIZE
 
         Note: The agent can only insert a package. It is withdrawn automatically
         by the environment for the purposes of training.
@@ -167,4 +172,4 @@ class WarehouseEnv(gym.Env):
         self.visualization = WarehouseGraph(self.current_step)
 
         # To view the Environment State at each step, uncomment this line
-        print(f'Step: \n {self.current_step}')
+        # print(f'Step: \n {self.current_step}')

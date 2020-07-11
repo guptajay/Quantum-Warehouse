@@ -5,6 +5,8 @@ import matplotlib.dates as mdates
 from matplotlib import colors, style
 
 GRID_SIZE = 7
+BLUE = '#2CBDFE'
+RED = '#CE5459'
 
 
 class WarehouseGraph:
@@ -81,7 +83,7 @@ class WarehouseGraph:
         data[3][3] = warehouse_state[48][1]
 
         # create discrete colormap
-        cmap = colors.ListedColormap(['blue', 'red'])
+        cmap = colors.ListedColormap([BLUE, RED])
         bounds = [0, 1, 2]
         norm = colors.BoundaryNorm(bounds, cmap.N)
 
