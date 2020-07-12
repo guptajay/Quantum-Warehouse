@@ -36,3 +36,7 @@ pip install -r Quantum-Warehouse/requirements.txt
 cd Quantum-Warehouse
 python main.py
 ```
+
+## Scope
+![Scope](img/scope.png)
+
