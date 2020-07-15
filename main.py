@@ -33,8 +33,8 @@ epochs = 0
 totalReward = 0
 
 while not done:
-    action = env.action_space.sample()
-    obs, rewards, done, info = env.step(action)
+    action = randint(1, 49)
+    obs, rewards, done, info = env.step([action, packages[epochs][0]])
     print("Package ID:", packages[epochs][0])
     print("Package Weight:", packages[epochs][1])
     env.render()

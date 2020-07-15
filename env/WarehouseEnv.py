@@ -9,10 +9,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 gym.logger.set_level(40)
 
-# Check env/Grid.pdf for Grid details
+# Check env/warehouse_grid.pdf for Grid details
 GRID_SIZE = 7
 DEPTH = math.ceil(math.sqrt(GRID_SIZE))
-WITHDRAW_TIME = 6
+
+# Timesteps after which a package will be withdrawn according to normal distribution defined below
+WITHDRAW_TIME = 5
 
 
 class WarehouseEnv(gym.Env):
@@ -31,7 +33,7 @@ class WarehouseEnv(gym.Env):
         Num      Observation                                Min        Max
         0        Index (Location) in Warehouse              1          GRID_SIZE * GRID_SIZE
         1        Status of Occupancy                        0 (Vacant) 1 (Occupied)
-        2        Timestamp of the package inside Warehouse  0          Inf
+        2        Package ID                                 20         80
 
     Actions:
         Type: Discrete(GRID_SIZE * GRID_SIZE)
@@ -42,7 +44,8 @@ class WarehouseEnv(gym.Env):
         GRID_SIZE * GRID_SIZE   Insert package at location GRID_SIZE * GRID_SIZE
 
         Note: The agent can only insert a package. It is withdrawn automatically
-        by the environment for the purposes of training.
+        by the environment after a fixed number of timesteps according to a
+        defined normal distribution.
 
     Reward:
         Reward is -1 per depth level in the warehouse grid.
@@ -82,25 +85,39 @@ class WarehouseEnv(gym.Env):
         return obs
 
     def _take_action(self, action):
+        self.timestep += 1
+
         # action = index of space in warehouse
-        self.index = action
+        self.index = action[0]
+        self.packageID = action[1]
 
         self.withdrawFlag = False
         self.withdrawPos = 0
 
-        # Increment timestep if shelf is occupied
-        for i in range(GRID_SIZE * GRID_SIZE):
-            if(self.current_step[i][1] == 1):
-                self.current_step[i][2] = self.current_step[i][2] + 1
+        # Withdraw a package from the warehouse after fixed timesteps according
+        # to a normal distribution defined below
+        if(self.timestep >= WITHDRAW_TIME):
+            self.timestep = 0
 
-             # Withdraw is package is been there for too long (for training only)
-                if(self.current_step[i][2] >= WITHDRAW_TIME):
+            withdrawPackageID = math.floor(np.random.normal(50, 7))
+
+            if(withdrawPackageID > 80):
+                withdrawPackageID = 80
+            if(withdrawPackageID < 20):
+                withdrawPackageID = 20
+
+            for i in range(GRID_SIZE * GRID_SIZE):
+                if(self.current_step[i][2] == withdrawPackageID):
+                    self.withdrawPackageID = self.current_step[i][2]
                     self.current_step[i][1] = 0
                     self.current_step[i][2] = 0
-                    self.withdrawPos = i+1
+                    self.withdrawPos = i + 1
                     self.withdrawFlag = True
+                    break
 
+        # Insert a package
         self.current_step[self.index-1][1] = 1
+        self.current_step[self.index-1][2] = self.packageID
 
     def step(self, action):
         # Execute one time step within the environment
@@ -116,6 +133,7 @@ class WarehouseEnv(gym.Env):
         else:
             reward = -4
 
+        # Setting reward if a package is withdrawn
         if(self.withdrawFlag):
             if(1 <= self.withdrawPos <= 24):
                 reward = reward - 1
@@ -143,28 +161,29 @@ class WarehouseEnv(gym.Env):
         # Reset the state of the environment to an initial state
         self.depth = DEPTH
         self.grid_size = GRID_SIZE
+        self.timestep = 0
 
         self.current_step = np.zeros(shape=(GRID_SIZE * GRID_SIZE, 3))
 
         for i in range(GRID_SIZE * GRID_SIZE):
-            # [index, empty/occupied (0/1), timestep]
+            # [index, empty/occupied (0/1), packageID]
             self.current_step[i] = (i+1, 0, 0)
 
         return self._next_observation()
 
     def render(self, mode='human', close=False):
         # Render the environment to the screen
-        if(self.withdrawFlag):
-            print("")
-            print("--------------------------------")
-            print(f'Position: {self.withdrawPos}')
-            print(f'AUTO: Package Withdrawn')
-            print("--------------------------------")
-
         print("--------------------------------")
         print(f'Position: {self.index}')
         print(f'Action: Package Inserted')
         print("--------------------------------")
+        if(self.withdrawFlag):
+            print("")
+            print("--------------------------------")
+            print(f'Package ID: {self.withdrawPackageID}')
+            print(f'Position: {self.withdrawPos}')
+            print(f'AUTO: Package Withdrawn')
+            print("--------------------------------")
         print("")
         print(f'Total Reward: {self.totalReward}')
         print("################################")

@@ -28,7 +28,7 @@ Num | Observation | Min | Max
 ---|---|---|---
 0 | Index (Location) in Warehouse | 1 | 49
 1 | Status of Occupancy | 0 (Vacant) | 1 (Occupied)
-2 | Timestamp of the package inside Warehouse | 0 | Inf
+2 | Package ID | 20 | 80
 
 ### Actions
 Type: Discrete(49)
@@ -41,9 +41,16 @@ Num | Action
 49 | Insert package at location 49
 
 Note:
-* The agent can only insert a package. It is withdrawn automatically by the environment when the timestamp of a package exceeds the `WITHDRAW_TIME` constant in `env/WarehouseEnv.py`.
+* The agent can only insert a package. It is withdrawn automatically by the environment.
 * Only one package can be kept at a shelf.
 * Every shelf has only one level. 
+
+### Package Withdrawal Scheme
+The packages are withdrawn automatically by the environment after a fixed number of timesteps `WITHDRAW_TIME` (configurable). This withdrawal scheme follows a normal distribution with a mean of 50 and a standard deviation of 7, both configurable.
+
+The environment accepts packages of IDs between 20 and 80. From the distribution, we can observe that packages with IDs between 40 and 60 are sold and thus withdrawn, most often. 
+
+![Package Withdrawal Scheme](../img/package_distribution.png) 
 
 ### Reward
 The reward is -1 per depth level in the warehouse grid.
