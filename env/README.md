@@ -46,11 +46,11 @@ Note:
 * Every shelf has only one level. 
 
 ### Package Withdrawal Scheme
-The packages are withdrawn automatically by the environment after a fixed number of timesteps `WITHDRAW_TIME` (configurable). This withdrawal scheme follows a normal distribution with a mean of 50 and a standard deviation of 7, both configurable.
+The packages are withdrawn automatically by the environment after a number of timesteps `WITHDRAW_TIME` (normally distributed - configurable). This package withdrawal scheme follows a normal distribution with a mean of 50 and a standard deviation of 7, both configurable.
 
-The environment accepts packages of IDs between 20 and 80. From the distribution, we can observe that packages with IDs between 40 and 60 are sold and thus withdrawn, most often. 
+The environment accepts packages of IDs between 20 and 80. From the distribution, we can observe that packages with IDs between 40 and 60 are sold and thus withdrawn, most often. From the figure on the left, the timesteps after which a package is withdrawn in also normally distributed. We can observe that the warehouse tries to withdraw a package often after between 4 to 6 timesteps.
 
-![Package Withdrawal Scheme](../img/package_distribution.png) 
+![Distributions](../img/distributions.png) 
 
 ### Reward
 The reward is -1 per depth level in the warehouse grid.

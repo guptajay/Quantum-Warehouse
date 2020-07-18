@@ -1,10 +1,12 @@
+"""
+Quantum Warehouse environment used by the RESTful API
+"""
 import random
 import json
 import gym
 from gym import spaces
 import numpy as np
 import math
-from .WarehouseGraph import WarehouseGraph
 import pandas as pd
 import matplotlib.pyplot as plt
 gym.logger.set_level(40)
@@ -13,8 +15,8 @@ gym.logger.set_level(40)
 GRID_SIZE = 7
 DEPTH = math.ceil(math.sqrt(GRID_SIZE))
 
-# Timesteps after which a package will be withdrawn according to normal distribution
-WITHDRAW_TIME = math.floor(np.random.normal(5, 1))
+# Timesteps after which a package will be withdrawn according to normal distribution defined below
+WITHDRAW_TIME = 5
 
 
 class WarehouseEnv(gym.Env):
@@ -44,7 +46,8 @@ class WarehouseEnv(gym.Env):
         GRID_SIZE * GRID_SIZE   Insert package at location GRID_SIZE * GRID_SIZE
 
         Note: The agent can only insert a package. It is withdrawn automatically
-        by the environment after a normally distributed number of timesteps.
+        by the environment after a fixed number of timesteps according to a
+        defined normal distribution.
 
     Reward:
         Reward is -1 per depth level in the warehouse grid.
@@ -93,12 +96,11 @@ class WarehouseEnv(gym.Env):
         self.withdrawFlag = False
         self.withdrawPos = 0
 
-        # Withdraw a package from the warehouse after normally distributed timesteps
-        if(self.timestep >= self.withdraw_time):
+        # Withdraw a package from the warehouse after fixed timesteps according
+        # to a normal distribution defined below
+        if(self.timestep >= WITHDRAW_TIME):
             # Reset Global Timestep
             self.timestep = 0
-            # Reset Withdraw Time to a sample from a normal distribution
-            self.withdraw_time = math.floor(np.random.normal(5, 1))
 
             withdrawPackageID = math.floor(np.random.normal(50, 7))
 
@@ -107,7 +109,7 @@ class WarehouseEnv(gym.Env):
             if(withdrawPackageID < 20):
                 withdrawPackageID = 20
 
-            for i in range(self.grid_size * self.grid_size):
+            for i in range(GRID_SIZE * GRID_SIZE):
                 if(self.current_step[i][2] == withdrawPackageID):
                     self.withdrawPackageID = self.current_step[i][2]
                     self.current_step[i][1] = 0
@@ -163,36 +165,11 @@ class WarehouseEnv(gym.Env):
         self.depth = DEPTH
         self.grid_size = GRID_SIZE
         self.timestep = 0
-        self.withdraw_time = WITHDRAW_TIME
 
-        self.current_step = np.zeros(
-            shape=(self.grid_size * self.grid_size, 3))
+        self.current_step = np.zeros(shape=(GRID_SIZE * GRID_SIZE, 3))
 
-        for i in range(self.grid_size * self.grid_size):
+        for i in range(GRID_SIZE * GRID_SIZE):
             # [index, empty/occupied (0/1), packageID]
             self.current_step[i] = (i+1, 0, 0)
 
         return self._next_observation()
-
-    def render(self, mode='human', close=False):
-        # Render the environment to the screen
-        print("--------------------------------")
-        print(f'Position: {self.index}')
-        print(f'Action: Package Inserted')
-        print("--------------------------------")
-        if(self.withdrawFlag):
-            print("")
-            print("--------------------------------")
-            print(f'Package ID: {self.withdrawPackageID}')
-            print(f'Position: {self.withdrawPos}')
-            print(f'AUTO: Package Withdrawn')
-            print("--------------------------------")
-        print("")
-        print(f'Total Reward: {self.totalReward}')
-        print("################################")
-
-        # Render the GUI of the warehouse
-        self.visualization = WarehouseGraph(self.current_step)
-
-        # To view the Environment State at each step, uncomment this line
-        # print(f'Step: \n {self.current_step}')

@@ -10,7 +10,7 @@ RED = '#CE5459'
 
 
 class WarehouseGraph:
-    """A stock trading visualization using matplotlib made to render OpenAI gym environments"""
+    """A warehouse visualization using matplotlib made to render OpenAI gym environments"""
 
     def __init__(self, warehouse_state):
 

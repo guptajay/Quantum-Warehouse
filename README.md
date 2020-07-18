@@ -1,5 +1,25 @@
+<p align="center">
+  <a href="https://github.com/guptajay/Quantum-Warehouse/tree/development">
+    <img src="img/logo.png" alt="Bootstrap logo" width="200">
+  </a>
+</p>
+
+<h3 align="center">Quantum Technologies</h3>
+
+<p align="center">
+  Reinforcement Learning architecture to automate long term planning of warehouse inventory for enterprise deployment.
+  <br>
+  <a href="https://github.com/guptajay/Quantum-Warehouse/wiki"><strong>Explore docs »</strong></a>
+  <br>
+  <br>
+  <a href="https://github.com/guptajay/Quantum-Warehouse/blob/development/main.py">Reinforcement Learning Algorithm</a>
+  ·
+  <a href="https://github.com/guptajay/Quantum-Warehouse/tree/development/env">Environment</a>
+  ·
+  <a href="https://github.com/guptajay/Quantum-Warehouse/tree/development/api">REST API</a>
+</p>
+
 # Quantum Warehouse
-> Reinforcement Learning architecture to automate long term planning of warehouse inventory for enterprise deployment.
 
 [![CodeFactor](https://www.codefactor.io/repository/github/guptajay/quantum-warehouse/badge/development?s=bebe47a25427119086bfbd09c524b267a20d4410)](https://www.codefactor.io/repository/github/guptajay/quantum-warehouse/overview/development)
 

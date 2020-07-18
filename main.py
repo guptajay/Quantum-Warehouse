@@ -1,12 +1,9 @@
 import gym
-import json
-import datetime as dt
 from env.WarehouseEnv import WarehouseEnv
 import pymongo
 from pymongo import MongoClient
 from data.config import USERNAME, PASSWORD, DATABASE_NAME
 from random import randint
-import numpy as np
 import random
 
 ## Database Configuration ##
