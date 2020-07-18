@@ -7,7 +7,7 @@
 <h3 align="center">Quantum Technologies</h3>
 
 <p align="center">
-  Reinforcement Learning architecture to automate long term planning of warehouse inventory for enterprise deployment.
+  Reinforcement Learning architecture to automate long term planning of inventory for enterprise deployment.
   <br>
   <a href="https://github.com/guptajay/Quantum-Warehouse/wiki"><strong>Explore docs »</strong></a>
   <br>
