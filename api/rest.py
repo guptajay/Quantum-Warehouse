@@ -21,23 +21,23 @@ warehouse = DeployWarehouse()
 
 
 @ns_ins_del.doc(responses={200: 'Package Successfully Inserted'},
-                params={'id': 'Specify the ID of the Package'})
-@ns_ins_del.route('/insert/<int:id>')
+                params={'packageID': 'Specify the ID of the Package'})
+@ns_ins_del.route('/insert/<int:packageID>')
 class Insert(Resource):
-    def post(self, id):
+    def post(self, packageID):
         # Inserts a package in the warehouse
-        action = warehouse.insertPackage(id)
-        return {'packageID': id, 'insertPos': action}
+        action = warehouse.insertPackage(packageID)
+        return {'packageID': packageID, 'insertPos': action}
 
 
 @ns_ins_del.doc(responses={200: 'Package Successfully Withdrawn'},
-                params={'id': 'Specify the ID of the Package'})
-@ns_ins_del.route('/withdraw/<int:id>')
+                params={'packageID': 'Specify the ID of the Package'})
+@ns_ins_del.route('/withdraw/<int:packageID>')
 class Withdraw(Resource):
-    def post(self, id):
+    def post(self, packageID):
         # Withdraws a package in the warehouse
-        action = warehouse.insertPackage(id)
-        return {'packageID': id, 'withdrawLos': action}
+        action = warehouse.insertPackage(packageID)
+        return {'packageID': packageID, 'withdrawLos': action}
 
 
 @ns_ins_del.doc(responses={200: 'Warehouse Successfully Reset'})
@@ -50,4 +50,4 @@ class Reset(Resource):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

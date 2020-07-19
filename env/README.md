@@ -22,13 +22,15 @@ This environment corresponds to a version of Quantum Warehouse.
 * R = Reward
 
 ### Observation
-Type: Box(3)
+Type: Box(5)
 
 Num | Observation | Min | Max
 ---|---|---|---
 0 | Index (Location) in Warehouse | 1 | 49
 1 | Status of Occupancy | 0 (Vacant) | 1 (Occupied)
-2 | Package ID | 20 | 80
+2 | Package ID | -Inf | Inf
+3 | Package Weight | -Inf | Inf
+4 | Package Type | 1 | 26
 
 ### Actions
 Type: Discrete(49)
@@ -46,11 +48,23 @@ Note:
 * Every shelf has only one level. 
 
 ### Package Withdrawal Scheme
-The packages are withdrawn automatically by the environment after a number of timesteps `WITHDRAW_TIME` (normally distributed - configurable). This package withdrawal scheme follows a normal distribution with a mean of 50 and a standard deviation of 7, both configurable.
+The packages are withdrawn automatically by the environment after a number of timesteps which are normally distributed for every type of package listed in the table below.
 
-The environment accepts packages of IDs between 20 and 80. From the distribution, we can observe that packages with IDs between 40 and 60 are sold and thus withdrawn, most often. From the figure on the left, the timesteps after which a package is withdrawn in also normally distributed. We can observe that the warehouse tries to withdraw a package often after between 4 to 6 timesteps.
-
-![Distributions](../img/distributions.png) 
+| Package Type |  µ | σ | Package Type |  µ  | σ |
+|:------------:|:--:|:-:|:------------:|:---:|:-:|
+|       1      |  5 | 1 |      14      |  70 | 1 |
+|       2      | 10 | 1 |      15      |  75 | 1 |
+|       3      | 15 | 1 |      16      |  80 | 1 |
+|       4      | 20 | 1 |      17      |  85 | 1 |
+|       5      | 25 | 1 |      18      |  90 | 1 |
+|       6      | 30 | 1 |      19      |  95 | 1 |
+|       7      | 35 | 1 |      20      | 100 | 1 |
+|       8      | 40 | 1 |      21      | 105 | 1 |
+|       9      | 45 | 1 |      22      | 110 | 1 |
+|      10      | 50 | 1 |      23      | 115 | 1 |
+|      11      | 55 | 1 |      24      | 120 | 1 |
+|      12      | 60 | 1 |      25      | 125 | 1 |
+|      13      | 65 | 1 |      26      | 130 | 1 |
 
 ### Reward
 The reward is -1 per depth level in the warehouse grid.
