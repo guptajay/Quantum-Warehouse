@@ -50,7 +50,8 @@ class WarehouseEnv(gym.Env):
         The warehouse is empty. 
 
     Episode Termination:
-        There are no more packages to insert in the warehouse.
+        1) There are no more packages to insert in the warehouse.
+        2) Warehouse is full
     """
 
     metadata = {'render.modes': ['human']}
@@ -176,6 +177,17 @@ class WarehouseEnv(gym.Env):
         done = False
         self.packagesProcessed += 1
         if(self.packagesProcessed >= self.totalPackages):
+            print("EPISODE TERMINATE: All packages inserted")
+            done = True
+
+        # Episode Finish Condition - Warehouse is full
+        warehouseFull = True
+        for i in range(self.grid_size * self.grid_size):
+            if(not self.current_step[i][1]):
+                warehouseFull = False
+                break
+        if(warehouseFull):
+            print("EPISODE TERMINATE: Warehouse is full")
             done = True
 
         obs = self._next_observation()

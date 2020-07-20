@@ -73,4 +73,5 @@ The reward is -1 per depth level in the warehouse grid.
 The warehouse is empty. 
 
 ### Episode Termination
-There are no more packages to insert in the warehouse.
+* There are no more packages to insert in the warehouse.
+* The warehouse is full.

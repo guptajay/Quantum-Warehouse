@@ -97,7 +97,7 @@ class WarehouseGraph:
         ax.set_yticks(np.arange(-.5, 7, 1))
         plt.suptitle("Quantum Warehouse")
         plt.show(block=False)
-        plt.pause(2)
+        plt.pause(0.000001)
         self.close()
 
     def close(self):
