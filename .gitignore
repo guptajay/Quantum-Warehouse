@@ -140,3 +140,4 @@ Thumbs.db
 
 # Database Configuration
 data/
+logs/

@@ -42,7 +42,7 @@ PASSWORD = "YOUR_PASSWORD"
 DATABASE_NAME = "warehouse"
 ```
 
-### Run (macOS & Linux)
+### Run Random Policy (macOS & Linux)
 > Python 3.7.4 should be installed in the system. 
 > You should be outside the root directory `Quantum-Warehouse`
 
@@ -55,6 +55,13 @@ pip install -r Quantum-Warehouse/requirements.txt
 ```
 cd Quantum-Warehouse
 python main.py
+```
+
+### Visualize with TensorBoard
+
+```
+cd Quantum-Warehouse
+tensorboard --logdir logs
 ```
 
 ## Scope
