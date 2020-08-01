@@ -1,7 +1,0 @@
-keras
-keras-rl
-matplotlib
-gym
-ExperimentManager
-tensorflow==1.13.1
-binpacking
