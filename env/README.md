@@ -29,8 +29,11 @@ Num | Observation | Min | Max
 0 | Index (Location) in Warehouse | 1 | 49
 1 | Status of Occupancy | 0 (Vacant) | 1 (Occupied)
 2 | Package ID | -Inf | Inf
-3 | Package Weight | -Inf | Inf
+3 | Package Weight | 0 | 1
 4 | Package Type | 1 | 26
+
+Note:
+* Packages upto weight 50 kg (configurable) can be inserted. The observation returned is the normalized weight value between 0 and 1.  
 
 ### Actions
 Type: Discrete(49)
@@ -67,7 +70,7 @@ The packages are withdrawn automatically by the environment after a number of ti
 |      13      | 65 | 1 |      26      | 130 | 1 |
 
 ### Reward
-The reward is -1 per depth level in the warehouse grid.
+The reward is -1 per depth level in the warehouse grid when a package is inserted.
 
 ### Starting State
 The warehouse is empty. 
