@@ -98,8 +98,8 @@ for i in range(10000):
 
         # action = {insertPos, PackageID, PackageWeight, PackageType}
         obs, rewards, done, info = env.step(
-            [action, randint(1, 100), randint(1, 100), getPackageType()])
-        env.render(log=False, render=False)
+            [action, randint(1, 100), randint(1, 50), getPackageType()])
+        env.render(log=True, render=True)
         totalReward += rewards
         epochs += 1
 
@@ -115,4 +115,4 @@ for i in range(10000):
     print("")
     print("Timesteps taken: {}".format(epochs))
     print("Reward incurred: {}".format(totalReward))
-    print("Episode Num: {}".format(i))
+    print("Episode Num: {}".format(i+1))

@@ -10,6 +10,7 @@ gym.logger.set_level(40)
 # Check env/warehouse_grid.pdf for Grid details
 GRID_SIZE = 7
 DEPTH = math.ceil(math.sqrt(GRID_SIZE))
+MAX_WEIGHT = 50
 
 
 class WarehouseEnv(gym.Env):
@@ -29,8 +30,11 @@ class WarehouseEnv(gym.Env):
         0        Index (Location) in Warehouse              1          GRID_SIZE * GRID_SIZE
         1        Status of Occupancy                        0 (Vacant) 1 (Occupied)
         2        Package ID                                 20         80
-        3        Package Weight                             -Inf       Inf
+        3        Package Weight                             0          1
         4        Package Type                               1          26
+
+        Note: Packages upto weight 50 kg (configurable) can be inserted. The observation
+        returned is the normalized weight value between 0 and 1.  
 
     Actions:
         Type: Discrete(GRID_SIZE * GRID_SIZE)
@@ -44,7 +48,8 @@ class WarehouseEnv(gym.Env):
         by the environment after a normally distributed number of timesteps.
 
     Reward:
-        Reward is -1 per depth level in the warehouse grid.
+        Reward is -1 per depth level in the warehouse grid when a package
+        is inserted in the warehouse.
 
     Starting State:
         The warehouse is empty. 
@@ -85,7 +90,7 @@ class WarehouseEnv(gym.Env):
         obs = {}
         for i in range(self.grid_size * self.grid_size):
             obs[i+1] = {'status': int(self.current_step[i][1]), 'packageID': int(self.current_step[i][2]),
-                        'packageWeight': int(self.current_step[i][3]), 'packageType': int(self.current_step[i][4])}
+                        'packageWeight': self.current_step[i][3], 'packageType': int(self.current_step[i][4])}
         return obs
 
     def _take_action(self, action):
@@ -135,7 +140,7 @@ class WarehouseEnv(gym.Env):
         # Insert a package and its attributes
         self.current_step[self.index-1][1] = 1
         self.current_step[self.index-1][2] = self.packageID
-        self.current_step[self.index-1][3] = self.packageWeight
+        self.current_step[self.index-1][3] = self.packageWeight/self.max_weight
         self.current_step[self.index-1][4] = self.packageType
         self.current_step[self.index-1][5] = self.withdrawTime
 
@@ -158,17 +163,19 @@ class WarehouseEnv(gym.Env):
         else:
             reward = -4
 
-        # Setting reward if a package is withdrawn
-        if(self.withdrawList):
-            for package in self.withdrawList:
-                if(1 <= package[0] <= 24):
-                    reward = reward - 1
-                elif(25 <= package[0] <= 40):
-                    reward = reward - 2
-                elif(41 <= package[0] <= 48):
-                    reward = reward - 3
-                else:
-                    reward = reward - 4
+        # 3 Aug 2020 - No need to reward the agent when a package is withdrawn
+        # It will make it easier for the agent to learn the package trend.
+
+        # if(self.withdrawList):
+        #     for package in self.withdrawList:
+        #         if(1 <= package[0] <= 24):
+        #             reward = reward - 1
+        #         elif(25 <= package[0] <= 40):
+        #             reward = reward - 2
+        #         elif(41 <= package[0] <= 48):
+        #             reward = reward - 3
+        #         else:
+        #             reward = reward - 4
 
         # For logging purposes
         self.totalReward = reward
@@ -198,6 +205,7 @@ class WarehouseEnv(gym.Env):
         """Reset the state of the environment to an initial state"""
         self.depth = DEPTH
         self.grid_size = GRID_SIZE
+        self.max_weight = MAX_WEIGHT
 
         # [index, empty/occupied (0/1), packageID, packageWeight, packageType, withdrawalTime]
         self.current_step = np.zeros(
