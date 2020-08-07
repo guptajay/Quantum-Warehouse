@@ -42,7 +42,7 @@ PASSWORD = "YOUR_PASSWORD"
 DATABASE_NAME = "warehouse"
 ```
 
-### Run Random Policy (macOS & Linux)
+### Virtual Environment Setup (macOS & Linux)
 > Python 3.7.4 should be installed in the system. 
 > You should be outside the root directory `Quantum-Warehouse`
 
@@ -50,19 +50,35 @@ DATABASE_NAME = "warehouse"
 python3 -m venv env 
 source env/bin/activate
 pip install -r Quantum-Warehouse/requirements.txt
+cd Quantum-Warehouse
 ```
 
+### Run Random Policy
+> Selects a random shelve in the warehouse.
 ```
-cd Quantum-Warehouse
-python main.py
+python main.py random_policy
+```
+
+### Run Baseline Policy
+> Selects the outermost shelf available in the warehouse.
+```
+python main.py baseline_policy
 ```
 
 ### Visualize with TensorBoard
 
 ```
-cd Quantum-Warehouse
 tensorboard --logdir logs
 ```
+
+### Policy Comparison (Baseline vs Random)
+
+* **Blue** : Baseline Policy
+* **Red** : Random Policy
+
+![Policy Comparison](img/policy_comparison.svg)
+
+**X-Axis** : Reward, **Y-Axis** : Episode Number
 
 ## Scope
 ![Scope](img/scope.png)

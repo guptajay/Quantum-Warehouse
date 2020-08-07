@@ -7,10 +7,11 @@ from random import randint
 import random
 from pprint import pprint
 import numpy as np
-import scipy.stats as stats
 import tensorflow as tf
 import datetime
-import pylab as pl
+from agents.random import random_policy
+from agents.baseline import baseline_policy
+import sys
 
 # Code Sample with Database Configuration
 
@@ -55,8 +56,6 @@ print("Timesteps taken: {}".format(epochs))
 print("Reward incurred: {}".format(totalReward))
 """
 
-# Random Policy
-
 # TensorBoard Setup
 current_time = datetime.datetime.now().strftime("%Y/%m/%d-%H/%M/%S")
 log_dir = 'logs/' + current_time
@@ -84,17 +83,11 @@ for i in range(10000):
     totalReward = 0
 
     while not done:
-        # take a random action
-        action = randint(1, 49)
-
-        # Check if the action will overwrite a package in existing location
-        validAction = False
-        while not validAction:
-            # take a random action again if a package is already there
-            if(obs[action]['status']):
-                action = randint(1, 49)
-            else:
-                validAction = True
+        # take a action according to a policy passed in the program argument
+        if(sys.argv[1] == 'random_policy'):
+            action = random_policy(obs)
+        elif(sys.argv[1] == 'baseline_policy'):
+            action = baseline_policy(obs)
 
         # action = {insertPos, PackageID, PackageWeight, PackageType}
         obs, rewards, done, info = env.step(
