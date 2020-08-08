@@ -12,7 +12,7 @@
   <a href="https://github.com/guptajay/Quantum-Warehouse/wiki"><strong>Explore docs »</strong></a>
   <br>
   <br>
-  <a href="https://github.com/guptajay/Quantum-Warehouse/blob/development/main.py">Reinforcement Learning Algorithm</a>
+  <a href="https://github.com/guptajay/Quantum-Warehouse/blob/development/agents">Reinforcement Learning Algorithm</a>
   ·
   <a href="https://github.com/guptajay/Quantum-Warehouse/tree/development/env">Environment</a>
   ·
@@ -22,6 +22,9 @@
 # Quantum Warehouse
 
 [![CodeFactor](https://www.codefactor.io/repository/github/guptajay/quantum-warehouse/badge/development?s=bebe47a25427119086bfbd09c524b267a20d4410)](https://www.codefactor.io/repository/github/guptajay/quantum-warehouse/overview/development)
+[![License](https://img.shields.io/github/license/guptajay/Quantum-Warehouse)](https://img.shields.io/github/license/guptajay/Quantum-Warehouse)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/guptajay/Quantum-Warehouse)
+
 
 ## Documentation
 All documentation is available in the GitHub Wiki [here](https://github.com/guptajay/Quantum-Warehouse/wiki). 

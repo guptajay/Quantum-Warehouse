@@ -57,7 +57,8 @@ print("Reward incurred: {}".format(totalReward))
 """
 
 # TensorBoard Setup
-current_time = datetime.datetime.now().strftime("%Y/%m/%d-%H/%M/%S")
+current_time = datetime.datetime.now().strftime(
+    sys.argv[1] + "-%Y/%m/%d-%H/%M/%S")
 log_dir = 'logs/' + current_time
 summary_writer = tf.summary.create_file_writer(log_dir)
 
